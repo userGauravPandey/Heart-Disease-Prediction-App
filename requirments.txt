@@ -1,7 +1,6 @@
 
-gitdb==4.0.12
-GitPython==3.1.45
-joblib==1.5.2
-pandas==2.3.3
-scikit-learn==1.7.2
-streamlit==1.50.0
+joblib
+pandas
+scikit-learn
+streamlit
+
