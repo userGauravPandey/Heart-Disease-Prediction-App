@@ -2,6 +2,8 @@ import streamlit as st
 import pandas as pd
 import joblib
 
+from st_slope import st_slope
+
 model=joblib.load('svm_heart.pkl')
 scaler=joblib.load("scaler.pkl")
 expected_columns=joblib.load('columns.pkl')
@@ -18,9 +20,9 @@ resting_ecg=st.selectbox('Resting ECG',['Normal',"ST","LVH"])
 max_hr=st.slider("Max Heart Rate",60,220,150)
 exercise_engine=st.selectbox("Exercise_Inducted Angine",['y','N'])
 oldpeak =st.slider('oldpeak (ST Depression)',0.0,6.0,1.0)
-st_slope=st.selectbox("ST Slope",['Up','Flat','Down'])
 
 if st.button("Predict"):
+
     raw_input={
         "Age":age,
         "RestingBP":resting_bp,
@@ -28,10 +30,10 @@ if st.button("Predict"):
         'FastingBS': fasting_bs,
         'MaxHR':max_hr,
         'Sex_'+sex: 1,
-        'ChestPainType_'+chest_pain:1,
-        'RestingECG_'+resting_ecg:1,
-        'ExerciseAngine_'+exercise_engine:1,
-        'ST_Slope_'+st_slope:1
+        'ChestPainType_'+ chest_pain: 1,
+        'RestingECG_'+ resting_ecg: 1,
+        'ExerciseAngine_'+ exercise_engine: 1,
+        'ST_Slope_'+ st_slope: 1
 
     }
     input_df=pd.DataFrame([raw_input])
