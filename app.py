@@ -5,7 +5,7 @@ import joblib
 model=joblib.load('svm_heart.pkl')
 scaler=joblib.load("scaler.pkl")
 expected_columns=joblib.load('columns.pkl')
-
+st.image("https://pngimg.com/uploads/heart/heart_PNG691.png",width=150)
 st.title("Heart stroke prediction by Gaurav Pandey")
 st.markdown('provide the folloewing details')
 age=st.slider('age',18,100,40)
@@ -33,17 +33,18 @@ if st.button("Predict"):
         'ExerciseAngine_'+exercise_engine:1,
         'ST_Slope_'+st_slope:1
 
-}
-input_df=pd.DataFrame([raw_input])
-for col in expected_columns:
-    if col not in input_df.columns:
-        input_df[col]=0
-input_df=input_df[expected_columns]
-scaled_input=scaler.transform(input_df)
-prediction=model.predict(scaled_input)[0]
+    }
+    input_df=pd.DataFrame([raw_input])
 
-if prediction==1:
-    st.error("High Risk Of Heart Disease")
-else:
-    st.success("Low Risk Of Heart Disease")
-   
+    for col in expected_columns:
+        if col not in input_df.columns:
+            input_df[col]=0
+    input_df=input_df[expected_columns]
+    scaled_input=scaler.transform(input_df)
+    prediction=model.predict(scaled_input)[0]
+
+    if prediction==1:
+        st.error("High Risk Of Heart Disease")
+    else:
+        st.success("Low Risk Of Heart Disease")
+    
